@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import userRouter from "./routes/user.route.js";
+import authRouter from "./routes/auth.route.js";
 
 dotenv.config();
 
@@ -13,8 +14,11 @@ const MONGO_URI =
 
 const app = express();
 
+app.use(express.json());
+
 // Mouting Routes
 app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
 
 mongoose
   .connect(MONGO_URI)
