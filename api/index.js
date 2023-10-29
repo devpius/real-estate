@@ -1,10 +1,12 @@
 import express from "express";
+import "express-async-errors";
 
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
+import { errorHandler } from "./utils/middleware/errorHandler.js";
 
 dotenv.config();
 
@@ -14,11 +16,15 @@ const MONGO_URI =
 
 const app = express();
 
+// Middleware
 app.use(express.json());
 
 // Mouting Routes
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+
+// Error middleware
+app.use(errorHandler);
 
 mongoose
   .connect(MONGO_URI)
