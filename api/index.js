@@ -3,13 +3,18 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-dotenv.config();
+import userRouter from "./routes/user.route.js";
 
-const app = express();
+dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 const MONGO_URI =
   process.env.MONGO_URI || "mongodb://localhost:27017/magimbi-estate";
+
+const app = express();
+
+// Mouting Routes
+app.use("/api/user", userRouter);
 
 mongoose
   .connect(MONGO_URI)
