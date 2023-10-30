@@ -24,7 +24,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(signInStart);
+    dispatch(signInStart());
 
     try {
       const response = await fetch("/api/auth/signin", {
