@@ -17,13 +17,15 @@ export const signup = async (req, res) => {
 export const signin = async (req, res) => {
   const { email, password } = req.body;
 
+  console.log(req.body);
   const validUser = await User.findOne({ email });
+
   if (!validUser) {
-    const error = errorFunc(404, "User not found");
+    const error = errorFunc(404, "Wrong credentials");
     return res.status(401).json({ success: false, message: error.message });
   }
 
-  const validPassword = bcrypt.compareSync(password, validUser.password);
+  const validPassword = await bcrypt.compare(password, validUser.password);
 
   if (!validPassword) {
     const error = errorFunc(401, "Wrong credentials");
