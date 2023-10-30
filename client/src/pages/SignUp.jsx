@@ -63,6 +63,7 @@ const SignUp = () => {
           onChange={handleChange}
         />
         <input
+          disabled={load}
           type="password"
           placeholder="password"
           className="border p-3 rounded-lg focus:outline-none"
